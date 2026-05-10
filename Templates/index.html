@@ -1,20 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Hospital Queue Predictor</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f766e, #0ea5e9);
+            color: white;
+            padding: 40px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 700px;
+            opacity: 0.95;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .section-subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .feature {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: #ffffff;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12);
+        }
+
+        .hint {
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #0f766e;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #0d9488;
+            transform: translateY(-1px);
+        }
+
+        .footer {
+            margin-top: 24px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .hero,
+            .card {
+                padding: 28px 22px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>🏥 Smart Hospital Queue Predictor</h1>
+    <div class="page">
+        <div class="hero">
+            <h1>🏥 Smart Hospital Queue Predictor</h1>
+            <p>
+                A cloud-based healthcare application built with Flask and Microsoft Azure
+                to prioritize patients, estimate waiting times, and securely store
+                medical reports.
+            </p>
+        </div>
 
-    <form method="POST" action="/predict" enctype="multipart/form-data">
-        <label>Patient Name:</label><br>
-        <input type="text" name="patient_name" required><br><br>
+        <div class="card">
+            <h2 class="section-title">Patient Intake Form</h2>
+            <p class="section-subtitle">
+                Enter patient details and symptoms to predict urgency and expected waiting time.
+            </p>
 
-        <label>Symptoms:</label><br>
-        <input type="text" name="symptoms" required><br><br>
-	<label>Medical Report (Optional):</label><br>
-	<input type="file" name="report"><br><br>
-        <button type="submit">Predict Priority</button>
-    </form>
+            <div class="features">
+                <span class="feature">Azure SQL Database</span>
+                <span class="feature">Blob Storage</span>
+                <span class="feature">Priority Prediction</span>
+                <span class="feature">Excel Reports</span>
+            </div>
+
+            <form method="POST" action="/predict" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="patient_name">Patient Name</label>
+                    <input
+                        type="text"
+                        id="patient_name"
+                        name="patient_name"
+                        placeholder="Enter patient name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="symptoms">Symptoms</label>
+                    <input
+                        type="text"
+                        id="symptoms"
+                        name="symptoms"
+                        placeholder="e.g. chest pain, fever, headache"
+                        required
+                    >
+                    <div class="hint">
+                        Examples: heart attack, chest pain, fever, vomiting
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="report">Medical Report (Optional)</label>
+                    <input
+                        type="file"
+                        id="report"
+                        name="report"
+                    >
+                    <div class="hint">
+                        Upload a PDF, scan, or image report.
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Predict Priority
+                </button>
+            </form>
+
+            <div class="footer">
+                Built with Python, Flask, Azure SQL Database, and Azure Blob Storage
+            </div>
+        </div>
+    </div>
 </body>
 </html>
