@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Hospital Queue Predictor</title>
+</head>
+<body>
+    <h1>🏥 Smart Hospital Queue Predictor</h1>
+
+    <form method="POST" action="/predict" enctype="multipart/form-data">
+        <label>Patient Name:</label><br>
+        <input type="text" name="patient_name" required><br><br>
+
+        <label>Symptoms:</label><br>
+        <input type="text" name="symptoms" required><br><br>
+	<label>Medical Report (Optional):</label><br>
+	<input type="file" name="report"><br><br>
+        <button type="submit">Predict Priority</button>
+    </form>
+</body>
+</html>
